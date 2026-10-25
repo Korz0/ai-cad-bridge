@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0", "request_id":"wider_bracket", "action":"modify", "units":"mm",
+  "input":"models/bracket.ipt", "output":"models/bracket_v2.ipt",
+  "operations":[{"id":"resize","type":"set_parameter","depends_on":[],"name":"Width","value":120}],
+  "snapshot":"models/bracket_v2.png"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ai-cad-bridge",
+  "version": "0.2.0",
+  "description": "Local Autodesk Inventor modeling tools for Codex",
+  "license": "MIT",
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "interface": {
+        "displayName": "AI CAD Bridge",
+        "shortDescription": "Model in Autodesk Inventor",
+        "longDescription": "Create and modify Inventor parts and assemblies from validated millimeter commands. Local Windows execution, per-face appearances, monolithic parts and STEP/STL export.",
+        "category": "Productivity",
+        "defaultPrompt": "Create an Inventor part in millimeters and verify its dimensions."
+      }
+    }
+  },
+  "author": {
+    "name": "Korz0"
+  },
+  "repository": "https://github.com/Korz0/ai-cad-bridge",
+  "homepage": "https://github.com/Korz0/ai-cad-bridge"
+}

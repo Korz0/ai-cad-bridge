@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0", "request_id": "bracket_demo", "action": "create_part",
+  "name": "Mechanical_Bracket", "units": "mm", "output": "models/bracket.ipt",
+  "parameters": {"Width": 100, "Height": 60, "Thickness": 10, "Bore": 8},
+  "operations": [
+    {"id":"base","type":"sketch","depends_on":[],"plane":"XY","geometry":[{"id":"outline","type":"rectangle","width":"Width","height":"Height"}]},
+    {"id":"pad","type":"extrude","depends_on":["base"],"sketch":"base","distance":"Thickness","operation":"join"},
+    {"id":"holes","type":"hole","depends_on":["pad"],"plane":"XY","centers":[[20,20],[80,20]],"diameter":"Bore","depth":"through_all","direction":"negative"}
+  ],
+  "exports":[{"format":"step","path":"models/bracket.step"},{"format":"stl","path":"models/bracket.stl"}],
+  "snapshot":"models/bracket.png"
+}

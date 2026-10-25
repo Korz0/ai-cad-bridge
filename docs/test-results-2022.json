@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-25",
+  "python": "3.14.3",
+  "unit_and_protocol_tests": 47,
+  "core": {
+    "inventor": {
+      "year": 2022,
+      "major": 26,
+      "display": "2022",
+      "support": "tested",
+      "warnings": []
+    },
+    "cases": [
+      {
+        "case": "box",
+        "passed": true,
+        "error": null,
+        "volume": 60000.0
+      },
+      {
+        "case": "holes",
+        "passed": true,
+        "error": null,
+        "volume": 59497.34517542561
+      },
+      {
+        "case": "blind",
+        "passed": true,
+        "error": null,
+        "volume": 59748.672587712805
+      },
+      {
+        "case": "cut",
+        "passed": true,
+        "error": null,
+        "volume": 59497.34517542561
+      },
+      {
+        "case": "fillet",
+        "passed": true,
+        "error": null,
+        "volume": 59931.71089364668
+      },
+      {
+        "case": "chamfer",
+        "passed": true,
+        "error": null,
+        "volume": 59841.333333333336
+      },
+      {
+        "case": "revolve",
+        "passed": true,
+        "error": null,
+        "volume": 18849.555921537947
+      },
+      {
+        "case": "linear",
+        "passed": true,
+        "error": null,
+        "volume": 58492.035526276835
+      },
+      {
+        "case": "circular",
+        "passed": true,
+        "error": null,
+        "volume": 97989.38070170252
+      },
+      {
+        "case": "mirror",
+        "passed": true,
+        "error": null,
+        "volume": 58994.69035085122
+      },
+      {
+        "case": "workplane",
+        "passed": true,
+        "error": null,
+        "volume": 3141.5926535899284
+      },
+      {
+        "case": "constraints",
+        "passed": true,
+        "error": null,
+        "volume": 0.0
+      },
+      {
+        "case": "arc",
+        "passed": true,
+        "error": null,
+        "volume": 0.0
+      },
+      {
+        "case": "params",
+        "passed": true,
+        "error": null,
+        "volume": 60000.0
+      },
+      {
+        "case": "modified",
+        "passed": true,
+        "error": null,
+        "volume": 72000.0
+      },
+      {
+        "case": "persisted",
+        "passed": true,
+        "error": null,
+        "volume": 59931.71089364668
+      },
+      {
+        "case": "assembly",
+        "passed": true,
+        "error": null,
+        "volume": null
+      },
+      {
+        "case": "rollback",
+        "passed": true,
+        "error": {
+          "operation_id": "miss",
+          "type": "RuntimeError",
+          "message": "Unhealthy operations: [{'name': 'AI_miss', 'health': 11780}]"
+        },
+        "volume": null
+      },
+      {
+        "case": "export",
+        "passed": true,
+        "error": null,
+        "volume": 60000.0
+      },
+      {
+        "case": "stl_mm_scale",
+        "passed": true,
+        "bounds_mm": [
+          100.0,
+          60.0,
+          10.0
+        ]
+      },
+      {
+        "case": "native_reopen",
+        "passed": true
+      }
+    ]
+  },
+  "finishing": {
+    "inventor": {
+      "year": 2022,
+      "major": 26,
+      "display": "2022",
+      "support": "tested",
+      "warnings": []
+    },
+    "passed": true,
+    "checks": [
+      "one_body_one_feature",
+      "volume",
+      "envelope",
+      "reopen_face_rgb",
+      "envelope_mismatch_rollback",
+      "unmatched_region_rollback"
+    ]
+  },
+  "installed_mcp_roundtrip": true,
+  "other_inventor_versions_tested": []
+}

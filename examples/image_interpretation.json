@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0", "request_id":"photo_interpretation", "action":"create_part", "units":"mm",
+  "output":"models/from_photo.ipt", "sources":[],
+  "observations":[{"name":"Width","value":null,"status":"unknown","confidence":0,"source":"Supply a front view and a measured reference"}],
+  "operations":[]
+}

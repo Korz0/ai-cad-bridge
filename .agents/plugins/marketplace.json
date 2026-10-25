@@ -1,0 +1,20 @@
+{
+  "name": "ai-cad-bridge-community",
+  "interface": {
+    "displayName": "AI CAD Bridge Community"
+  },
+  "plugins": [
+    {
+      "name": "ai-cad-bridge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-cad-bridge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

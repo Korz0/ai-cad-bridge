@@ -1,0 +1,4 @@
+{
+  "schema_version":"1.0", "request_id":"inspect_bracket", "action":"inspect", "units":"mm",
+  "input":"models/bracket.ipt", "operations":[]
+}

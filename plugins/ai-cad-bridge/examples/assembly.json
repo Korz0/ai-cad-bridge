@@ -1,0 +1,10 @@
+{
+  "schema_version":"1.0", "request_id":"assembly_demo", "action":"create_assembly", "units":"mm",
+  "output":"models/assembly.iam",
+  "operations":[
+    {"id":"lower","type":"occurrence","depends_on":[],"path":"models/bracket.ipt","translation":[0,0,0],"grounded":true},
+    {"id":"upper","type":"occurrence","depends_on":[],"path":"models/bracket.ipt","translation":[0,0,30]},
+    {"id":"spacing","type":"assembly_constraint","depends_on":["lower","upper"],"kind":"flush","first":"lower/XY","second":"upper/XY","offset":30}
+  ],
+  "snapshot":"models/assembly.png"
+}

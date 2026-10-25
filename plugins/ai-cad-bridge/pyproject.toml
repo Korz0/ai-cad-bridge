@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-cad-bridge"
+version = "0.2.0"
+description = "Local Autodesk Inventor automation for Codex over MCP"
+requires-python = ">=3.11,<3.15"
+license = {file = "LICENSE"}
+dependencies = ["pywin32>=311; sys_platform == 'win32'", "jsonschema>=4.23,<5", "mcp>=1.20,<2"]
+
+[project.scripts]
+ai-cad = "cad_bridge.cli:main"
+ai-cad-mcp = "cad_bridge.server:main"
+
+[tool.setuptools.package-data]
+cad_bridge = ["*.json"]
+
+[tool.setuptools.packages.find]
+include = ["cad_bridge*"]

@@ -1,0 +1,69 @@
+name: Publish release
+on:
+  workflow_run:
+    workflows: [Tests]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: write
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python scripts/package_release.py --output dist
+      - name: Publish tested beta with downloadable archives
+        uses: actions/github-script@v7
+        env:
+          TESTED_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          script: |
+            const fs = require('fs');
+            const crypto = require('crypto');
+            const {owner, repo} = context.repo;
+            const version = JSON.parse(fs.readFileSync('plugins/ai-cad-bridge/plugin.json','utf8')).version;
+            const tag = `v${version}`;
+            const names = [`ai-cad-bridge-source-${version}.zip`, `ai-cad-bridge-plugin-${version}.zip`, 'SHA256SUMS.txt'];
+            const body = fs.readFileSync(`docs/releases/${version}.md`, 'utf8');
+            let release;
+            try {
+              release = (await github.rest.repos.getReleaseByTag({owner,repo,tag})).data;
+              if (!release.draft) { core.info(`${tag} already published; leave it unchanged.`); return; }
+              if (release.target_commitish !== process.env.TESTED_SHA) {
+                throw new Error('Existing draft targets another commit; resolve it manually.');
+              }
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              release = (await github.rest.repos.createRelease({owner,repo,tag_name:tag,
+                target_commitish:process.env.TESTED_SHA,name:`AI CAD Bridge ${version} (beta)`,
+                body,draft:true,prerelease:true})).data;
+            }
+            const existing = await github.paginate(github.rest.repos.listReleaseAssets,{owner,repo,release_id:release.id});
+            for (const name of names) {
+              const data = fs.readFileSync(`dist/${name}`);
+              const previous = existing.find(asset => asset.name === name);
+              const digest = 'sha256:' + crypto.createHash('sha256').update(data).digest('hex');
+              if (previous) {
+                if (previous.size !== data.length || previous.digest !== digest) {
+                  throw new Error(`Existing draft asset differs: ${name}; no overwrite performed.`);
+                }
+              } else {
+                await github.rest.repos.uploadReleaseAsset({owner,repo,release_id:release.id,
+                  name,data,headers:{'content-type':name.endsWith('.zip')?'application/zip':'text/plain'}});
+              }
+            }
+            await github.rest.repos.updateRelease({owner,repo,release_id:release.id,draft:false,prerelease:true,body});
+            core.info(`Published ${release.html_url}`);

@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "request_id": "colored_block",
+  "action": "create_part",
+  "units": "mm",
+  "output": "colored_block.ipt",
+  "monolithic": true,
+  "expected_size_mm": [
+    40,
+    30,
+    10
+  ],
+  "operations": [
+    {
+      "id": "outline",
+      "type": "sketch",
+      "depends_on": [],
+      "plane": "XY",
+      "geometry": [
+        {
+          "id": "r",
+          "type": "rectangle",
+          "width": 40,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "id": "body",
+      "type": "extrude",
+      "depends_on": [
+        "outline"
+      ],
+      "sketch": "outline",
+      "distance": 10,
+      "operation": "join"
+    }
+  ],
+  "appearances": {
+    "base": "black",
+    "palette": [
+      {
+        "name": "black",
+        "rgb": [
+          30,
+          32,
+          35
+        ],
+        "gloss": 0.2
+      },
+      {
+        "name": "blue",
+        "rgb": [
+          20,
+          95,
+          190
+        ],
+        "gloss": 0.5
+      }
+    ],
+    "regions": [
+      {
+        "appearance": "blue",
+        "box_mm": {
+          "min": [
+            -1,
+            -1,
+            9.99
+          ],
+          "max": [
+            41,
+            31,
+            10.01
+          ]
+        },
+        "min_faces": 1,
+        "max_faces": 1
+      }
+    ]
+  },
+  "snapshot": "colored_block.png"
+}
